@@ -1,0 +1,1 @@
+Hi, my name is {{fname}} {{lname}}. I have next products: {{products.0}}, {{products.1}} and {{products.2}}.
