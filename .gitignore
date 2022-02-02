@@ -1,0 +1,17 @@
+__pycache__
+.pytest_cache
+generated
+
+.env
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/
+
+### VK AUTH ###
+config.v2.json
