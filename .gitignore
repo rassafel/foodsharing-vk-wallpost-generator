@@ -15,3 +15,6 @@ generated
 
 ### VK AUTH ###
 config.v2.json
+
+### LOGS ###
+generator.log
