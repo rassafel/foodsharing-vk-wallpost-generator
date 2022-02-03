@@ -1,4 +1,8 @@
+import logging
+
 import vk_api
+
+log = logging.getLogger(__name__)
 
 
 def captcha_handler(captcha):
@@ -27,18 +31,18 @@ def upload_photo(api,
                  photos=None,
                  **kwargs):
     if not photos:
-        print("List photos for loading is empty.")
+        log.info("List photos for loading is empty")
         return
-    assert album_id, "Album id cannot be None."
+    assert album_id, "Album id cannot be None"
 
     photos = vk_api.VkUpload(api).photo(
         album_id=album_id,
         photos=photos,
         group_id=group_id
     )
-    print("Start loading photos to VK.")
+    log.info("Start loading photos to VK")
     photos = list(map(lambda photo: f"photo{photo['owner_id']}_{photo['id']}", photos))
-    print("Finish loading photos to VK. Loaded photos:", photos)
+    log.info("Finish loading photos to VK. Loaded photos: %s", photos)
     return ",".join(photos)
 
 
@@ -49,11 +53,11 @@ def upload_post(api,
                 lat=None,
                 long=None,
                 **kwargs):
-    post_id = api.wall.post(message=message,
+    result = post_id = api.wall.post(message=message,
                             owner_id=f"-{group_id}",
                             from_group=1,
                             lat=lat,
                             long=long,
                             mute_notifications=1,
                             attachments=attachments)
-    print(f"Created post with id = {post_id} in group with id = {group_id}.")
+    log.info("Created post with id = %s in group with id = %s", result["post_id"], group_id)

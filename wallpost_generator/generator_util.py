@@ -1,46 +1,49 @@
+import logging
 import os
 import random
 
 import chevron
 
+log = logging.getLogger(__name__)
+
 
 def load_file(file_path, name="item"):
-    assert file_path, "File path cannot be empty."
-    print(f"Start loading {name} from:", file_path)
+    assert file_path, "File path cannot be empty"
+    log.info("Start loading %s from: %s", name, file_path)
     with open(file_path, "r") as f:
         text = f.read()
-        print(f"Finish loading {name} from:", file_path)
+        log.info("Finish loading %s from: %s", name, file_path)
         return text
 
 
 def files_from_dir(dir_path, name="items"):
-    assert dir_path, "Dir path cannot be empty."
+    assert dir_path, "Dir path cannot be empty"
     if not dir_path.endswith("/"):
         dir_path = dir_path + "/"
     files = os.listdir(dir_path)
-    print(f"Existed {name} in {dir_path}:", files)
+    log.info("Existed %s in %s: %s", name, dir_path, files)
     return list(map(lambda file: dir_path + file, files))
 
 
 def choose_random(lst, name="item"):
     assert lst, "List cannot be empty"
     item = random.choice(lst)
-    print(f"Chosen random {name}:", item)
+    log.info("Chosen random %s: %s", name, item)
     return item
 
 
 def shuffle(lst, name="items"):
     assert lst, "List cannot be empty"
-    print(f"Start shuffle {name}:", lst)
+    log.info("Start shuffle %s: %s", name, lst)
     random.shuffle(lst)
-    print(f"Shuffle {name} result:", lst)
+    log.info("Shuffle %s result: %s", name, lst)
     return lst
 
 
 def render_template(template, data):
-    print("Before render template:", template)
+    log.info("Before render template: %s", template)
     result = chevron.render(template, data)
-    print("After render template:", result)
+    log.info("After render template: %s", result)
     return result
 
 
@@ -54,7 +57,7 @@ def load_and_render(templates_path,
         values = {}
 
         products = load_file(products_p, "products")
-        assert products, "Products cannot be empty."
+        assert products, "Products cannot be empty"
         products = products.split("\n")
         values["products"] = shuffle(products, "products")
         values["fname"] = "Ivan"
@@ -81,7 +84,7 @@ def get_photos(images_path, min_count, max_count):
         shuffle(images, "images")
         count = random.randint(min_count, min(len(images), max_count))
         result = images[:count]
-        print(f"Chosen {count} random images:", result)
+        log.info("Chosen %d random images: %s", count, result)
     return result
 
 
