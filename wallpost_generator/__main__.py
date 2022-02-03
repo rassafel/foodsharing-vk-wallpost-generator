@@ -10,7 +10,7 @@ _levels = {
     'debug': logging.DEBUG
 }
 
-_level = os.getenv('LOG_LEVEL', 'debug')
+_level = os.getenv('LOG_LEVEL', 'info')
 _logLevel = _levels[_level]
 
 logger = logging.getLogger()
