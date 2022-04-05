@@ -42,7 +42,8 @@ def upload_photo(api,
         group_id=group_id
     )
     log.info("Start loading photos to VK")
-    photos = list(map(lambda photo: f"photo{photo['owner_id']}_{photo['id']}", photos))
+    photos = list(
+        map(lambda photo: f"photo{photo['owner_id']}_{photo['id']}", photos))
     log.info("Finish loading photos to VK. Loaded photos: %s", photos)
     return ",".join(photos)
 
@@ -55,10 +56,11 @@ def upload_post(api,
                 long=None,
                 **kwargs):
     result = post_id = api.wall.post(message=message,
-                            owner_id=f"-{group_id}",
-                            from_group=1,
-                            lat=lat,
-                            long=long,
-                            mute_notifications=1,
-                            attachments=attachments)
-    log.info("Created post with id = %s in group with id = %s", result["post_id"], group_id)
+                                     owner_id=f"-{group_id}",
+                                     from_group=1,
+                                     lat=lat,
+                                     long=long,
+                                     mute_notifications=1,
+                                     attachments=attachments)
+    log.info("Created post with id = %s in group with id = %s",
+             result["post_id"], group_id)

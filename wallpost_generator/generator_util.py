@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
+import chevron
 import logging
 import os
 import random
-
-import chevron
 
 log = logging.getLogger(__name__)
 

@@ -16,9 +16,10 @@ _logLevel = _levels[_level]
 logger = logging.getLogger()
 logger.setLevel(_logLevel)
 
-formatter = logging.Formatter(fmt='%(asctime)s.%(msecs)03d %(levelname)5s %(process)d --- ['
-                              '%(threadName)15s] %(name)-40s: %(message)s',
-                              datefmt='%Y-%m-%d,%H:%M:%S')
+formatter = logging.Formatter(
+    fmt='%(asctime)s.%(msecs)03d %(levelname)5s %(process)d --- ['
+        '%(threadName)15s] %(name)-40s: %(message)s',
+    datefmt='%Y-%m-%d,%H:%M:%S')
 handler = logging.StreamHandler(sys.stdout)
 handler.setLevel(logging.INFO)
 handler.setFormatter(formatter)
